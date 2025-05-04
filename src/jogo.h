@@ -1,0 +1,2 @@
+void digitacao();
+int guessgame();
