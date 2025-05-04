@@ -40,7 +40,27 @@ int intro(){
 }
 
 void menu(){
-    
+    limpartela();
+    printf("\n----Menu Principal----\n");
+    printf("Digite o que deseja fazer a seguir: \n1. Continuar História\n2. Reiniciar Save\n3. Sair\n");
+    int escolha;
+    printf("\nescolha: ");
+    scanf("%d", &escolha);
+    switch (escolha){
+    case 1:
+       printf("\nContinuar");
+       break;
+    case 2:
+       printf("\nReiniciando Save...\n");
+       remove("log");
+       printf("LOG removido!");
+       break;
+    case 3:
+       printf("\nSAIR\n");
+       break;   
+    default:
+         printf("Opção inválida!");
+    }
 };
 
 void digitacao(){
@@ -77,6 +97,13 @@ int guessgame(){
         }else{
             printf("\nParabéns! Você acertou! O número que eu estava pensando é: %d\n", numero_correto);
             break;
+        }
+    }   
+
 }
-}
+
+void limpartela(){ //função para limpar o terminal com comandos ANSI, códigos especiais de escape que controlam a aparência e o comportamento do terminal
+    printf("\033[2J");//limpa a tela
+    printf("\033[H");//move o cursor pro topo (linha 0, coluna 0)
+    fflush(stdout);
 }
