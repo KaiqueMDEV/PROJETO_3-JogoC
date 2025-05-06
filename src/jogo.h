@@ -5,3 +5,4 @@ void menu();
 void limpartela();
 void inserir_vidas(int vidas);
 void desafio1();
+void desafio2();

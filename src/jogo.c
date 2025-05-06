@@ -53,10 +53,19 @@ void menu(){
        printf("\nanon1mo333: vamos para o primeiro jogo. Surpreenda-me.");
        fflush(stdout);
        sleep(1);
-       printf("\nPressione ENTER para continuar para o menu principal."); //adiciona mais interatividade ao código
+       printf("\nPressione ENTER para continuar"); //adiciona mais interatividade ao código
        getchar(); //limpa o buffer
        getchar(); //solicita uma entrada do usuário
         desafio1();  // Chama o primeiro desafio
+        sleep(1);
+        digitacao();
+       printf("\nanon1mo333: fique atento às oportunidades. Vamos ao segundo jogo. Boa sorte.");
+       fflush(stdout);
+       sleep(1);
+       printf("\nPressione ENTER para continuar");
+       getchar(); 
+       getchar(); 
+       desafio2();
         break;
     case 2:
        printf("\nReiniciando Save...\n");
@@ -138,6 +147,7 @@ void desafio1() {
         while (vidas > 0) {
             inserir_vidas(vidas);  //exibe as vidas atuais
             //pergunta sobre "Hamlet"
+            printf("\nJogo 1: Trivia\n");
             printf("\nPergunta: Em 'Hamlet', o que leva à morte do próprio Hamlet?\n");
             printf("Escolha a alternativa correta:\n");
             printf("1. A traição de seu tio\n");
@@ -162,6 +172,38 @@ void desafio1() {
         }
 
     }
+    
+}
+
+// Função para o Desafio 2 - "O que eu sou"
+void desafio2() {
+    FILE *arquivo = fopen("log", "w"); //cria o log de ações do jogador após a cena.
+    int vidas = 3;  // Inicia com 3 vidas
+    char resposta[100]; // Variável para armazenar a resposta do jogador
+    
+    while (vidas > 0) {
+        inserir_vidas(vidas);  // Exibe as vidas atuais
+        
+        // Dica do hacker
+        printf("\nJogo 2: O que eu sou?\n");
+        printf("Dica: Eu paraliso suas pernas e surjo diante do perigo, apesar de ser incapacitante sou eu que te mantenho vivo. Agora me diga, quem sou eu?\n");
+        printf("Digite a palavra (em caixa alta): ");
+        scanf("%s", resposta); // Lê a resposta do jogador
+        
+        // Checando a resposta correta (a palavra é "medo")
+        if (strcmp(resposta, "MEDO") != 0) {  // Se a resposta estiver errada
+            limpartela();
+            printf("Resposta errada! Perdeu uma vida.\n");
+            vidas--;  // Diminui uma vida
+            fclose(arquivo);
+            break;
+        } else {
+            printf("Você acertou! A palavra é 'medo'.\n");
+            fclose(arquivo);
+            break;  // Sai do loop se o jogador acertar
+        }
+    }
+    
     
 }
 
