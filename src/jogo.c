@@ -17,11 +17,11 @@ int intro(){ //introdução do jogo, mostra um jogo simples de "fachada" e logo 
         }
     } //inicio da interação com o hacker
     digitacao(); 
-    printf("anon1mo333: Está se divertindo? Vejo que gostou do meu joguinho, mas agora eu quero jogar também :) \n");
+    printf("anon1mo333: Está se divertindo? Vejo que gostou do meu joguinho, mas agora que tal jogarmos juntos? :) \n");
     fflush(stdout);
     sleep(3);
     digitacao();
-    printf("anon1mo333: Vou te explicar como vai funcionar agora... \n");
+    printf("anon1mo333: Vou te explicar como vai funcionar... \n");
     fflush(stdout);
     sleep(1);
     digitacao();
@@ -39,6 +39,7 @@ int intro(){ //introdução do jogo, mostra um jogo simples de "fachada" e logo 
     fclose(arquivo);
 }
 
+
 void menu(){
     limpartela(); 
     printf("\n----Menu Principal----\n");
@@ -48,8 +49,15 @@ void menu(){
     scanf("%d", &escolha);
     switch (escolha){
     case 1:
-       printf("\nContinuar");
-       break;
+       digitacao();
+       printf("\nanon1mo333: vamos para o primeiro jogo. Surpreenda-me.");
+       fflush(stdout);
+       sleep(1);
+       printf("\nPressione ENTER para continuar para o menu principal."); //adiciona mais interatividade ao código
+       getchar(); //limpa o buffer
+       getchar(); //solicita uma entrada do usuário
+        desafio1();  // Chama o primeiro desafio
+        break;
     case 2:
        printf("\nReiniciando Save...\n");
        remove("log"); //remove o arquivo "log", futuramente será usado para apagar o arquivo de save do jogador.
@@ -107,3 +115,54 @@ void limpartela(){ //função para limpar o terminal com comandos ANSI, códigos
     printf("\033[H");//move o cursor pro topo (linha 0, coluna 0)
     fflush(stdout);
 }
+
+
+void inserir_vidas(int vidas) {
+    
+    //exibe os corações com base nas vidas restantes
+    printf("\nVidas: ");
+    for (int i = 0; i < 3; i++) {
+        if (i < vidas) {
+            printf("❤️ "); //coração cheio
+        } else {
+            printf("💔 "); //coração quebrado
+        }
+    }
+    printf("\n");
+}
+
+void desafio1() {
+    FILE *arquivo = fopen("log", "w"); //cria o log de ações do jogador após a cena.
+    int vidas = 3; //número inicial de vidas
+    int escolha;
+        while (vidas > 0) {
+            inserir_vidas(vidas);  //exibe as vidas atuais
+            //pergunta sobre "Hamlet"
+            printf("\nPergunta: Em 'Hamlet', o que leva à morte do próprio Hamlet?\n");
+            printf("Escolha a alternativa correta:\n");
+            printf("1. A traição de seu tio\n");
+            printf("2. O veneno em sua espada\n");
+            printf("3. Sua indecisão e falha em agir\n");
+            printf("4. A luta com Laertes\n");
+            printf("Digite o número da sua escolha: ");
+            scanf("%d", &escolha);
+        
+        // Checando a resposta correta (A indecisão de Hamlet)
+        if (escolha != 3) {  // Se o jogador escolher errado
+            limpartela();
+            printf("Resposta errada! Perdeu uma vida.\n");
+            vidas--;  // Diminui uma vida
+            fclose(arquivo);
+            break; 
+
+        } else {
+            printf("Você acertou!\n");
+            fclose(arquivo);
+            break;  // Sai do loop se o jogador acertar
+        }
+
+    }
+    
+}
+
+
