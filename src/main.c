@@ -16,4 +16,5 @@ int main(){
     }else{ //se existir, pula direto para o menu, dispensando a introdução.
         menu();
     }
+    return 0;
 }
