@@ -67,6 +67,7 @@ void menu(int *faseatual, int *vidas){
                 break; // Adicionando o break aqui para não cair no próximo case
             case 2:
                 printf("Você tem certeza que deseja reiniciar o save?\n1. Sim\n2. Não\n");
+                printf("escolha: ");
                 scanf("%d", &escolha2);
                 if (escolha2 == 1) { //se o jogador escolher 1, modifica as vidas para 3 e a fase para 1 no arquivo
                     FILE *arquivosave = fopen("save.bin", "w");
@@ -103,6 +104,7 @@ void menu(int *faseatual, int *vidas){
                 break;
             case 5: //hard reset
                 printf("Você tem certeza que deseja reiniciar TUDO?\n1. Sim\n2. Não\n");
+                printf("escolha: ");
                 scanf("%d", &escolha2);
                 if (escolha2 == 1) { //se o jogador escolher 1, apaga o arquivo log e o arquivo save.bin
                     remove("log");
@@ -155,6 +157,7 @@ int guessgame(){ //jogo de fachada, um simples jogo de adivinhação, digite um 
     int escolha;
     printf("Olá! Bem vindo ao Guess Game! Adivinhe qual numero estou pensando de 1 a 100 :D\n");
     while(1){
+        printf("\nDigite um número: ");
         scanf("%d", &numero);
         if(numero > numero_correto){
             printf("\nHmm, seu número é maior que o meu! Tente denovo!\n");
