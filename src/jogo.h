@@ -1,8 +1,12 @@
 void digitacao();
 int guessgame();
 int intro();
-void menu();
+void menu(int *faseatual, int *vidas);
+void save_arquivo(int *vidas, int *faseatual);
+void load_arquivo(int *vidas, int *faseatual);
 void limpartela();
-void inserir_vidas(int vidas);
+void inserir_vidas(int *vidas);
 void desafio1();
 void desafio2();
+void pressenter();
+void remove_vida(int *vidas);
