@@ -48,8 +48,7 @@ void menu(int *faseatual, int *vidas){
         int escolha;
         inserir_vidas(vidas); //exibe as vidas atuais
         printf("\nFase atual: %d de 4\n", *faseatual); //exibe a fase atual do jogador
-        printf("\nescolha: ");
-        scanf("%d", &escolha);
+        escolha = userinput(6); //pega a entrada do jogador e verifica se é válida
         switch (escolha) {
             case 1:
                 switch(*faseatual) { //verifica a fase atual do jogador e inicia o jogo na fase correspondente
@@ -133,7 +132,7 @@ void menu(int *faseatual, int *vidas){
 
 void digitacao(){ //função que simula uma interação com uma pessoa real, exibe no terminal uma digitação falsa que serve para dar mais imersão na cena
     printf("anon1mo333: "); //print fixo
-    fflush(stdout); //limpa o 
+    fflush(stdout); //limpa o buffer para garantir que a mensagem seja exibida imediatamente
 
     for(int i = 0; i < 2; i++){ //simula por alguns ciclos
         printf("\ranon1mo333: Digitando.  "); //esta parte atua como uma "animação", dando a entender que alguém está digitando de fato. 
@@ -241,16 +240,17 @@ void desafio2(int *vidas) { //desafio 2 - "O que eu sou"
     printf("anon1mo333: fique atento às oportunidades. Vamos ao segundo jogo. Boa sorte.");
     fflush(stdout);
     sleep(1);
-    pressenter();  
+    pressenter();
     char resposta[100]; // Variável para armazenar a resposta do jogador
     
-    while (1) {
-        inserir_vidas(vidas);  //exibe as vidas atuais  
+    while (1) { 
         //dica do hacker
         printf("\nJogo 2: O que eu sou?\n");
+        inserir_vidas(vidas);  //exibe as vidas atuais 
         sleep(1);
-        printf("Dica: Eu paraliso suas pernas e surjo diante do perigo, apesar de ser incapacitante sou eu que te mantenho vivo. Agora me diga, quem sou eu?\n");
-        printf("Digite a palavra (em caixa alta): ");
+        printf("\nDica: Eu paraliso suas pernas e surjo diante do perigo, apesar de ser incapacitante sou eu que te mantenho vivo. Agora me diga, quem sou eu?\n");
+        printf("\nDigite a palavra (em caixa alta): ");
+        fflush(stdout);
         scanf("%s", resposta); //Lê a resposta do jogador
         FILE *arquivolog = fopen("log", "a"); //Abre o arquivo de log em modo append
         fprintf(arquivolog, "resposta: %s\n", resposta); //Escreve a resposta do jogador no arquivo de log
@@ -264,7 +264,7 @@ void desafio2(int *vidas) { //desafio 2 - "O que eu sou"
             pressenter();
             break;
         } else {
-            printf("Você acertou! A palavra é 'MEDO'.\n");
+            printf("Você acertou. A palavra é 'MEDO'\n");
             pressenter();
             break;  //Sai do loop se o jogador acertar
         }
