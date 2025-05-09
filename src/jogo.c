@@ -41,7 +41,7 @@ int intro(){ //introdução do jogo, mostra um jogo simples de "fachada" e logo 
 
 void menu(int *faseatual, int *vidas){
     while(1) {
-        FILE *arquivolog = fopen("log", "a"); // Abre o arquivo de log em modo append
+        FILE *arquivolog = fopen("log", "a"); //abre o arquivo de log em modo append
         limpartela(); 
         printf("\n----Menu Principal----\n\n");
         printf("Digite o que deseja fazer a seguir: \n\n1. Continuar História\n2. Reiniciar Save\n3. Salvar Arquivo\n4. Carregar Arquivo\n5. Hard RESET\n6. Sair do Jogo\n");
@@ -60,10 +60,62 @@ void menu(int *faseatual, int *vidas){
                         desafio2(vidas);
                         *faseatual = 3; //atualiza a fase atual do jogador
                         break;
+                    case 3:
+                        desafio3(vidas);
+                        if (*vidas == 0) { //se o jogador perder todas as vidas, encerra o jogo
+                            limpartela();
+                            printf("\033[31mVocê perdeu todas as suas vidas... \n \033[0m");
+                            sleep(1);
+                            digitacao();
+                            printf("anon1mo333: Você não é digno de continuar.\n");
+                            fflush(stdout);
+                            sleep(1);
+                            digitacao();
+                            printf("anon1mo333: \033[31mFIM DE JOGO.\n \033[0m");
+                            fflush(stdout);
+                            return;
+                        }
+                        *faseatual = 4; //atualiza a fase atual do jogador
+                        break;
+                    case 4:
+                        desafio4(vidas); //chama o desafio 4
+                        if (*vidas == 0) { //se o jogador perder todas as vidas, encerra o jogo
+                            limpartela();
+                            printf("\033[31mVocê perdeu todas as suas vidas... \n \033[0m");
+                            sleep(1);
+                            digitacao();
+                            printf("anon1mo333: Você não é digno de continuar.\n");
+                            fflush(stdout);
+                            sleep(1);
+                            digitacao();
+                            printf("anon1mo333: \033[31mFIM DE JOGO.\n \033[0m");
+                            fflush(stdout);
+                            FILE *arquivolog = fopen("log", "a");
+                            fprintf(arquivolog, "DERROTA\n");
+                            fclose(arquivolog);
+                            return;
+                        }else{
+                            limpartela();
+                            digitacao();
+                            printf("anon1mo333: Parabéns, você completou o jogo.\n");
+                            fflush(stdout);
+                            sleep(1);
+                            digitacao();
+                            printf("anon1mo333: Você está livre pra ir agora. Nos veremos novamente algum dia.\n");
+                            fflush(stdout);
+                            sleep(1);
+                            printf("\033[0;32mFIM DE JOGO.\n\033[0m");
+                            FILE *arquivolog = fopen("log", "a");
+                            fprintf(arquivolog, "VITORIA\n");
+                            fclose(arquivolog);
+                            inserir_vidas(vidas); //exibe as vidas atuais
+                            pressenter();
+                            return;
+                        }
                     default:
                         *faseatual = 1;
                 }
-                break; // Adicionando o break aqui para não cair no próximo case
+                break; //Adicionando o break aqui para não cair no próximo case
             case 2:
                 printf("Você tem certeza que deseja reiniciar o save?\n1. Sim\n2. Não\n");
                 int escolha = userinput(2);
@@ -76,7 +128,7 @@ void menu(int *faseatual, int *vidas){
                     fwrite(faseatual, sizeof(int), 1, arquivosave); //escreve a fase atual no arquivo
                     fprintf(arquivolog, "RESTART\n"); // Escreve a resposta do jogador no arquivo de log
                     fclose(arquivosave);
-                    fclose(arquivolog); // Fecha o arquivo de log
+                    fclose(arquivolog);
                     pressenter();
                 } else {
                     printf("Reinicialização cancelada.\n");
@@ -89,16 +141,16 @@ void menu(int *faseatual, int *vidas){
                 // Após carregar os valores
                 printf("Salvando: Fase: %d, Vidas: %d\n", *faseatual, *vidas); 
                 pressenter();
-                fprintf(arquivolog, "SAVE\n"); // Escreve a resposta do jogador no arquivo de log
-                fclose(arquivolog); // Fecha o arquivo de log
+                fprintf(arquivolog, "SAVE\n");
+                fclose(arquivolog);
                 break;
             case 4:
                 load_arquivo(vidas, faseatual); //carrega o progresso do jogador
                 // Após salvar os valores
                 printf("Carregado: Fase: %d, Vidas: %d\n", *faseatual, *vidas);
                 pressenter();
-                fprintf(arquivolog, "LOAD\n"); // Escreve a resposta do jogador no arquivo de log
-                fclose(arquivolog); // Fecha o arquivo de log
+                fprintf(arquivolog, "LOAD\n");
+                fclose(arquivolog);
                 limpartela();
                 break;
             case 5: //hard reset
@@ -120,6 +172,8 @@ void menu(int *faseatual, int *vidas){
                 break;
             case 6: //sai do jogo
                 printf("Saindo do jogo...\n");
+                fprintf(arquivolog, "SAIR\n");
+                fclose(arquivolog);
                 exit(0); //sai do jogo
                 break;
             default:
@@ -215,7 +269,7 @@ void desafio1(int *vidas) { //desafio 1 - trivia sobre "Hamlet"
             fprintf(arquivolog, "escolha: %c\n", escolha_char); //escreve a escolha do jogador no arquivo de log
             fclose(arquivolog); //fecha o arquivo de log
         
-        // Checando a resposta correta (A indecisão de Hamlet)
+        //checando a resposta correta (A indecisão de Hamlet)
         if (escolha != 3) {  //Se o jogador escolher errado
             limpartela();
             printf("Incorreto. -1 chance.\n");
@@ -241,13 +295,13 @@ void desafio2(int *vidas) { //desafio 2 - "O que eu sou"
     fflush(stdout);
     sleep(1);
     pressenter();
-    char resposta[100]; // Variável para armazenar a resposta do jogador
+    char resposta[100]; //armazenar a resposta do jogador
     
     while (1) { 
         //dica do hacker
         printf("\nJogo 2: O que eu sou?\n");
-        inserir_vidas(vidas);  //exibe as vidas atuais 
         sleep(1);
+        inserir_vidas(vidas);  //exibe as vidas atuais 
         printf("\nDica: Eu paraliso suas pernas e surjo diante do perigo, apesar de ser incapacitante sou eu que te mantenho vivo. Agora me diga, quem sou eu?\n");
         printf("\nDigite a palavra (em caixa alta): ");
         fflush(stdout);
@@ -257,7 +311,7 @@ void desafio2(int *vidas) { //desafio 2 - "O que eu sou"
         fclose(arquivolog); //fecha o arquivo de log
         
         //Checando a resposta correta (a palavra é "medo")
-        if (strcmp(resposta, "MEDO") != 0) {  // Se a resposta estiver errada
+        if (strcmp(resposta, "MEDO") != 0) {  //Se a resposta estiver errada
             limpartela();
             printf("Incorreto. Não aja impulsivamente.\n");
             remove_vida(vidas);  //Diminui uma vida
@@ -321,4 +375,123 @@ int userinput(int maxopcoes){ //pega a entrada do jogador e verifica se é váli
             return escolha;  //retorna a escolha válida
         }
     }
+}
+
+void desafio3(int *vidas){
+    limpartela();
+    digitacao();
+    printf("anon1mo333: Espero que você tenha vidas sobrando, pois o proximo jogo vai testar sua sorte.\n");
+    fflush(stdout);
+    sleep(1);
+    pressenter();
+    while(1){
+        limpartela();
+        printf("\nJogo 3: Pedra, Papel e Tesoura\n");
+        sleep(1);
+        inserir_vidas(vidas); //exibe as vidas atuais
+        printf("\nEscolha sua opção:\n");
+        printf("1. Pedra\n");
+        printf("2. Papel\n");
+        printf("3. Tesoura\n");
+        int escolha = userinput(3); //pega a entrada do jogador e verifica se é válida
+        FILE *arquivolog = fopen("log", "a"); //abre o arquivo de log em modo append
+        char escolha_char = escolha + '0'; //converte a escolha para char
+        fprintf(arquivolog, "escolha: %c\n", escolha_char); //escreve a escolha do jogador no arquivo de log
+        fclose(arquivolog); //fecha o arquivo de log
+
+        int computador = rand() % 3 + 1; //gera uma escolha aleatória para o computador
+
+        if (escolha == computador) { //se o jogador e o computador escolherem a mesma coisa
+            printf("Empate! Ambos escolheram ");
+            switch (computador) {
+                case 1:
+                    printf("Pedra.\n");
+                    break;
+                case 2:
+                    printf("Papel.\n");
+                    break;
+                case 3:
+                    printf("Tesoura.\n");
+                    break;
+        }     
+            pressenter();
+            continue; //continua o loop se houver empate
+        }else if ((escolha == 1 && computador == 3) || (escolha == 2 && computador == 1) || (escolha == 3 && computador == 2)) { //verifica se o jogador ganhou
+            switch (escolha) {
+                case 1:
+                    printf("Você escolheu pedra e eu tesoura, você venceu, parabéns.\n");
+                    break;
+                case 2:
+                    printf("Você escolheu papel e eu pedra, você venceu, parabéns\n");
+                    break;
+                case 3:
+                    printf("Você escolheu tesoura e eu papel, você venceu, parabéns\n");
+                    break;
+            }
+            pressenter();
+            return; //sai do loop se o jogador ganhar
+        }else { //se o jogador perder
+            limpartela();
+            switch (computador) {
+                case 1:
+                    printf("Você escolheu tesoura e eu pedra, você perdeu.\n");
+                    break;
+                case 2:
+                    printf("Você escolheu pedra e eu papel, você perdeu.\n");
+                    break;
+                case 3:
+                    printf("Você escolheu papel e eu tesoura, você perdeu.\n");
+                    break;
+            }
+            remove_vida(vidas); //remove uma vida do jogador
+            pressenter();
+            return; //sai do loop se o jogador perder
+    }
+    }
+}
+
+void desafio4(int *vidas){ //desafio 4 - guess game
+    limpartela();
+    digitacao();
+    printf("anon1mo333: Hora do último jogo, preparado?\n");
+    fflush(stdout);
+    pressenter();
+    limpartela();
+    digitacao();
+    printf("anon1mo333: Que tal uma rodada de GUESS GAME? você terá 10 tentativas para adivinhar o número.\n");
+    fflush(stdout);
+    sleep(3);
+    limpartela();
+    srand(time(NULL)); //inicializa o gerador de números aleatórios com o tempo atual
+    printf("Desafio 4: Guess Game\n");
+    sleep(1);
+    inserir_vidas(vidas); //exibe as vidas atuais
+    printf("\nOlá, bem-vindo ao Guess Game! Adivinhe o número que estou pensando de 1 a 100 :)\n");
+    int numero_correto = rand() % 101; //gera um número aleatóriamente como resultado correto
+    int tentativas = 7; //número de tentativas
+    while(1){
+    printf("\nTentativas restantes: %d\n", tentativas); //exibe o número de tentativas restantes
+    int numero = userinput(100); //pega a entrada do jogador e verifica se é válida
+    char string[4]; //string para armazenar a escolha do jogador
+    FILE *arquivolog = fopen("log", "a");
+    sprintf(string, "%d", numero);
+    fprintf(arquivolog, "escolha: %s\n", string); //escreve a escolha do jogador no arquivo de log
+    fclose(arquivolog); //fecha o arquivo de log
+    if (numero > numero_correto) { //se o número for maior que o correto
+        printf("\nHmm, seu número é maior que o meu! Tente denovo!\n");
+        tentativas--;
+    }else if (numero < numero_correto) { //se o número for menor que o correto
+        printf("\nHmm, seu número é menor que o meu! Tente denovo!\n");
+        tentativas--;
+    }else if(numero == numero_correto){ //se o número estiver correto
+        printf("\nParabéns! Você acertou! O número que eu estava pensando é: %d\n", numero_correto);
+        pressenter();
+        return; //sai do loop se o jogador acertar
+    } if(tentativas == 0) { //se o jogador não tiver mais tentativas
+        printf("\nVocê não tem mais tentativas. O número correto era: %d :(\n", numero_correto);
+        remove_vida(vidas); //remove uma vida do jogador
+        pressenter();
+        return; //sai do loop se o jogador perder
+    }
+}
 }

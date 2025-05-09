@@ -11,3 +11,5 @@ void desafio2(int *vidas);
 void pressenter();
 void remove_vida(int *vidas);
 int userinput(int maxopcoes);
+void desafio3(int *vidas);
+void desafio4(int *vidas);
