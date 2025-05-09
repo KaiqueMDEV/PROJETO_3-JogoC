@@ -1,3 +1,76 @@
+RESTART
 SAVE
+SAVE
+LOAD
+escolha: 2
+-1 vida
+SAVE
+LOAD
+LOAD
+resposta: medo
+-1 vida
+SAVE
+LOAD
+LOAD
+LOAD
+LOAD
+LOAD
 escolha: 3
 SAVE
+LOAD
+resposta: MEDO
+RESTART
+escolha: 4
+-1 vida
+resposta: 22
+-1 vida
+LOAD
+LOAD
+LOAD
+SAVE
+escolha: 3
+resposta: s
+-1 vida
+escolha: 2
+-1 vida
+resposta: s
+-1 vida
+escolha: 3
+resposta: a
+-1 vida
+escolha: 4
+-1 vida
+escolha: 3
+escolha: 2
+-1 vida
+escolha: 3
+resposta: abla
+-1 vida
+escolha: 3
+escolha: 3
+resposta: sdewe
+-1 vida
+escolha: 3
+resposta: MEDO
+escolha: 3
+resposta: 3213213
+-1 vida
+escolha: 3
+escolha: 3
+resposta: 2
+-1 vida
+escolha: 3
+resposta: 222
+-1 vida
+RESTART
+RESTART
+LOAD
+escolha: 3
+escolha: 3
+resposta: sada
+-1 vida
+escolha: 3
+resposta: dsds
+-1 vida
+escolha: 3
+resposta: MEDO
