@@ -1,3 +1,30 @@
+RESTART
 SAVE
+SAVE
+LOAD
+escolha: 2
+-1 vida
+SAVE
+LOAD
+LOAD
+resposta: medo
+-1 vida
+SAVE
+LOAD
+LOAD
+LOAD
+LOAD
+LOAD
 escolha: 3
+SAVE
+LOAD
+resposta: MEDO
+RESTART
+escolha: 4
+-1 vida
+resposta: 22
+-1 vida
+LOAD
+LOAD
+LOAD
 SAVE
