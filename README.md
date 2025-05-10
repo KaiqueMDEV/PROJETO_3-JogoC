@@ -8,7 +8,10 @@ Projeto da disciplina de **Desenvolvimento de Algoritmos** no curso de **Ciênci
 
 ## Desenvolvedores: 
 
-Desenvolvido por: Kaique Medeiros Moreira & Thayane de Sousa Andrade
+Desenvolvido por: 
+Kaique Medeiros Moreira: 22.224.005-3
+& 
+Thayane de Sousa Andrade: 22.224.003-8
 
 ## Proposta:
 
