@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="placeholder.png" alt="Banner provisório para o projeto" />
+  <img src="header_system_break.png" alt="Banner provisório para o projeto" />
 </p>
 
 ### PROJETO 3: Jogo em C (ainda sem título)
@@ -29,6 +29,8 @@ Toda a jogatina é feita por meio de entradas de texto no terminal, as escolhas 
 
 O jogo se inicia com um jogo de "fachada" sobre adivinhação de números, no fim do mesmo, o hacker "anon1mo333" se apresenta em uma sequência cinemática e da início ao jogo de verdade. A jogatina inteira possui muita interatividade e um foco na imersão do jogador, com funções de "delay" que atrasam o funcionamento do código propositalmente de forma a proporcionar uma experiência mais realista como no caso da digitação demorada do hacker, simulando uma ação humana. Todos os desafios ou "puzzles" são voltados para a temática de programação e computação num geral, tornando a experiência mais familiar com o projeto e o curso como um todo.
 
+PS: arquivo de LOG e de SAVE é criado durante a execução do código.
+
 ### Progresso: 
 
- 📍 🟩🟩🟥🟥🟥🟥🟥🟥🟥🟥 🏁 
+ 📍 🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩 🏁 
