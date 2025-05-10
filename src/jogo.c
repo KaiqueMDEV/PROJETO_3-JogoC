@@ -458,7 +458,7 @@ void desafio4(int *vidas){ //desafio 4 - guess game
     pressenter();
     limpartela();
     digitacao();
-    printf("anon1mo333: Que tal uma rodada de GUESS GAME? você terá 10 tentativas para adivinhar o número.\n");
+    printf("anon1mo333: Que tal uma rodada de GUESS GAME? você terá 7 tentativas para adivinhar o número.\n");
     fflush(stdout);
     sleep(3);
     limpartela();
